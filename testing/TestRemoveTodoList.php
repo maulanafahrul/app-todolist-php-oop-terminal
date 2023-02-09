@@ -5,7 +5,7 @@ require_once "../businessLogic/RemoveTodoList.php";
 require_once "../businessLogic/ShowTodoList.php";
 require_once "../businessLogic/AddTodoList.php";
 
-
+// data dummy
 addTodoList("aku");
 addTodoList("sayang");
 addTodoList("kamu");
