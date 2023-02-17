@@ -1,7 +1,7 @@
 <?php
 
-namespace TodoListRepository {
-    
+namespace Repository {
+
     use Entity\TodoList;
 
     interface TodoListRepository {
@@ -11,5 +11,25 @@ namespace TodoListRepository {
         function remove(int $number): bool;
 
         function findAll(): array;
+    }
+
+    class TodoListRepositoryImpl implements TodoListRepository {
+
+        private array $todoList = array();
+
+        function save(TodoList $todoList): void
+        {
+
+        }
+
+        function remove(int $number): bool
+        {
+            return true;
+        }
+
+        function findAll(): array 
+        {
+            return $this->todoList;
+        }
     }
 }
