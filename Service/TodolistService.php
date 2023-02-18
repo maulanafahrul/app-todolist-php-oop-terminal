@@ -19,7 +19,7 @@ namespace Service {
 
         public function __construct(TodoListRepository $todoListRepository)
         {
-            return $this->todoListRepository;
+            return $this->todoListRepository = $todoListRepository;
         }
 
         function showTodoList(): void

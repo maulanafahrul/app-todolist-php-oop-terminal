@@ -15,7 +15,7 @@ namespace Repository {
 
     class TodoListRepositoryImpl implements TodoListRepository {
 
-        private array $todoList = array();
+        public array $todoList = array();
 
         function save(TodoList $todoList): void
         {
