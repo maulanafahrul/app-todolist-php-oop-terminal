@@ -2,9 +2,10 @@
 
 namespace Service {
 
-    use Repository\TodoListRepository;
+    use Entity\Todolist;
+    use Repository\TodolistRepository;
 
-    interface TodoListService {
+    interface TodolistService {
 
         function showTodoList(): void;
 
@@ -13,33 +14,39 @@ namespace Service {
         function removeTodoList(int $number): void;
     }
 
-    class TodoListServiceImpl implements TodoListService {
+    class TodolistServiceImpl implements TodolistService {
 
-        private TodoListRepository $todoListRepository;
+        private TodolistRepository $todolistRepository;
 
-        public function __construct(TodoListRepository $todoListRepository)
+        public function __construct(TodolistRepository $todolistRepository)
         {
-            return $this->todoListRepository = $todoListRepository;
+            return $this->todolistRepository = $todolistRepository;
         }
 
-        function showTodoList(): void
+        function showTodolist(): void
         {
             
             echo "TODOLIST". PHP_EOL;
-            $todolist = $this->todoListRepository->findAll();
+            $todolist = $this->todolistRepository->findAll();
             foreach($todolist as $number => $value){
-                echo "$number. $value". PHP_EOL;
+                echo "$number. ". $value->getTodo(). PHP_EOL;
             }
         }
 
-        function addTodoList(string $todo): void
+        function addTodolist(string $todo): void
         {
-
+            $todolist = new Todolist($todo);
+            $this->todolistRepository->save($todolist);
+            echo "Sukses menambah TODOLIST" . PHP_EOL;
         }
 
-        function removeTodoList(int $number): void
+        function removeTodolist(int $number): void
         {
-
+            if($this->todolistRepository->remove($number)){
+                echo "Berhasil menghapus todo". PHP_EOL;
+            }else{
+                echo "Gagal menghapus todo". PHP_EOL;
+            }
         }
     }
 }

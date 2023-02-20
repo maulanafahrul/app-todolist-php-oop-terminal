@@ -4,18 +4,46 @@ require_once __DIR__ . "/../Entity/Todolist.php";
 require_once __DIR__ . "/../Repository/TodolistRepository.php";
 require_once __DIR__ . "/../Service/TodolistService.php";
 
-use Repository\TodoListRepository;
-use Service\TodoListServiceImpl;
-use Repository\TodoListRepositoryImpl;
 
-function testShowTodoList(): void 
+use Entity\Todolist;
+use Service\TodolistServiceImpl;
+use Repository\TodolistRepositoryImpl;
+
+function testShowTodolist(): void 
 {
-    $todoListRepository = new TodoListRepositoryImpl();
-    $todoListRepository->todoList[1] = "belajar mtk";
+    $todolistRepository = new TodolistRepositoryImpl();
+    $todolistRepository->todolist[1] = new Todolist("belajar piano");
+    $todolistRepository->todolist[2] = new Todolist("belajar gitar");
 
-    $todoListService = new TodoListServiceImpl($todoListRepository);
+    $todolistService = new TodolistServiceImpl($todolistRepository);
 
-    $todoListService->showTodoList();
+    $todolistService->showTodoList();
+}
+function testAddTodolist(): void 
+{
+    $todolistRepository = new TodolistRepositoryImpl();
+    
+    $todolistService = new TodolistServiceImpl($todolistRepository);
+    $todolistService->addTodolist("Belajar piano");
+    $todolistService->addTodolist("Belajar gitar");
+    $todolistService->showTodolist();
+}
+function testRemoveTodolist(): void 
+{
+    $todolistRepository = new TodolistRepositoryImpl();
+    
+    $todolistService = new TodolistServiceImpl($todolistRepository);
+    $todolistService->addTodolist("Belajar piano");
+    $todolistService->addTodolist("Belajar gitar");
+
+    $todolistService->showTodolist();
+    
+    $todolistService->removeTodolist(1);
+    $todolistService->showTodolist();
+    
+    $todolistService->removeTodolist(4);
+    $todolistService->showTodolist();
+
 }
 
-testShowTodoList();
+testRemoveTodolist();
