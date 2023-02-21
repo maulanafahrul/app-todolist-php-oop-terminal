@@ -1,9 +1,10 @@
 <?php 
 
-namespace TodoListView {
+namespace View {
     use Service\TodolistService;
     use Helper\InputHelper;
-    class TodoListView {
+    
+    class TodolistView {
 
         private TodolistService $todolistService;
 
@@ -40,12 +41,28 @@ namespace TodoListView {
 
         function addTodolist(): void
         {
+            echo "MENAMBAHKAN TODOLIST" . PHP_EOL;
 
+            $todo = InputHelper::input("Todo (Masukan x jika ingin membatalkan) ");
+
+            if ($todo == "x"|| $todo == "X") {
+                echo "Batal memasukan todo" . PHP_EOL;
+            }else {
+                $this->todolistService->addTodoList($todo);
+            }
         }
 
         function removeTodolist(): void 
         {
-            
+            echo "MENGHAPUS TODO" . PHP_EOL;
+
+            $pilihan = InputHelper::input("Masukan nomor(Masukan x jika ingin membatalkan");
+
+            if($pilihan == "x" || $pilihan == "X") {
+                echo "Batal menghapus todo" . PHP_EOL;
+            }else {
+                $this->todolistService->removeTodoList($pilihan);
+            }
         }
     }
 }
